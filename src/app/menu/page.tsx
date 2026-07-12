@@ -11,7 +11,7 @@ interface PizzaData {
   name: string;
   description: string;
   price: number;
-  image?: { asset?: { url?: string } };
+  image?: { asset?: { url?: string } } | string;
   popular?: boolean;
   category: string;
 }
@@ -23,8 +23,16 @@ export default function MenuPage() {
   const { dispatch } = useCart();
 
   useEffect(() => {
-    const fetchPizzas = async () => {
+    const loadPizzas = async () => {
       try {
+        const localPizzas = localStorage.getItem("pizzaLabMenu");
+        if (localPizzas) {
+          const parsed = JSON.parse(localPizzas);
+          setPizzas(parsed);
+          setLoading(false);
+          return;
+        }
+
         const res = await fetch("/api/menu");
         const data = await res.json();
         setPizzas(data);
@@ -34,7 +42,7 @@ export default function MenuPage() {
         setLoading(false);
       }
     };
-    fetchPizzas();
+    loadPizzas();
   }, []);
 
   const categories = ["all", ...new Set(pizzas.map((p) => p.category))];

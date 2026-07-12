@@ -61,7 +61,9 @@ export default function Cart() {
                     >
                       <div className="flex items-center gap-4">
                         <div className="w-20 h-20 bg-gradient-to-br from-amber-100 to-orange-100 rounded-xl flex items-center justify-center text-3xl flex-shrink-0">
-                          {item.image?.asset?.url ? (
+                          {typeof item.image === "string" ? (
+                            <img src={item.image} alt={item.name} className="w-full h-full object-cover rounded-xl" />
+                          ) : item.image?.asset?.url ? (
                             <img src={item.image.asset.url} alt={item.name} className="w-full h-full object-cover rounded-xl" />
                           ) : (
                             "🍕"

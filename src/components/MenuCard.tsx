@@ -8,12 +8,20 @@ interface MenuCardProps {
   name: string;
   description: string;
   price: number;
-  image?: { asset?: { url?: string } };
+  image?: { asset?: { url?: string } } | string;
   popular?: boolean;
   onAddToCart: () => void;
 }
 
+function getImageUrl(image?: { asset?: { url?: string } } | string): string | undefined {
+  if (!image) return undefined;
+  if (typeof image === "string") return image;
+  return image.asset?.url;
+}
+
 export default function MenuCard({ name, description, price, image, popular, onAddToCart }: MenuCardProps) {
+  const imageUrl = getImageUrl(image);
+
   return (
     <motion.div
       whileHover={{ y: -12, scale: 1.02 }}
@@ -21,9 +29,9 @@ export default function MenuCard({ name, description, price, image, popular, onA
       className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
     >
       <div className="relative h-56 bg-gradient-to-br from-amber-100 to-orange-100 overflow-hidden">
-        {image?.asset?.url ? (
+        {imageUrl ? (
           <Image 
-            src={image.asset.url} 
+            src={imageUrl} 
             alt={name} 
             fill 
             className="object-cover group-hover:scale-110 transition-transform duration-500"

@@ -6,7 +6,7 @@ export interface PizzaItem {
   _id: string;
   name: string;
   price: number;
-  image?: { asset?: { url?: string } };
+  image?: { asset?: { url?: string } } | string;
   quantity: number;
 }
 

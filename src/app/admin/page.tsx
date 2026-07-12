@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Download, Copy, Check, Trash2, Edit2, Save, X, MessageSquare, Settings, Image as ImageIcon, Menu as MenuIcon, Home as HomeIcon } from "lucide-react";
+import { Sparkles, Download, Copy, Check, Trash2, Edit2, Save, X, MessageSquare, Settings, Image as ImageIcon, Menu as MenuIcon, Link as LinkIcon } from "lucide-react";
 
 type TabType = "images" | "menu" | "settings" | "assistant";
 
@@ -13,6 +13,7 @@ interface PizzaItem {
   price: number;
   category: string;
   popular: boolean;
+  image?: string;
 }
 
 interface SiteSettings {
@@ -36,7 +37,8 @@ export default function AdminPage() {
   // Menu Manager
   const [pizzas, setPizzas] = useState<PizzaItem[]>([]);
   const [editingPizza, setEditingPizza] = useState<PizzaItem | null>(null);
-  const [newPizza, setNewPizza] = useState({ name: "", description: "", price: "", category: "classic", popular: false });
+  const [newPizza, setNewPizza] = useState({ name: "", description: "", price: "", category: "classic", popular: false, image: "" });
+  const [selectedImageForPizza, setSelectedImageForPizza] = useState<string>("");
 
   // Settings
   const [settings, setSettings] = useState<SiteSettings>({
@@ -60,12 +62,12 @@ export default function AdminPage() {
       setPizzas(JSON.parse(saved));
     } else {
       setPizzas([
-        { _id: "1", name: "Margherita", description: "Fresh mozzarella, tomato sauce, basil", price: 12, category: "classic", popular: true },
-        { _id: "2", name: "Pepperoni", description: "Classic pepperoni with mozzarella", price: 14, category: "classic", popular: true },
-        { _id: "3", name: "Hawaiian", description: "Ham, pineapple, mozzarella", price: 15, category: "classic", popular: false },
-        { _id: "4", name: "BBQ Chicken", description: "Grilled chicken, BBQ sauce, red onions", price: 16, category: "signature", popular: true },
-        { _id: "5", name: "Truffle Mushroom", description: "Wild mushrooms, truffle oil, fontina", price: 18, category: "specialty", popular: false },
-        { _id: "6", name: "Garlic Knots", description: "Freshly baked with marinara", price: 6, category: "sides", popular: false },
+        { _id: "1", name: "Margherita", description: "Fresh mozzarella, tomato sauce, basil", price: 12, category: "classic", popular: true, image: "" },
+        { _id: "2", name: "Pepperoni", description: "Classic pepperoni with mozzarella", price: 14, category: "classic", popular: true, image: "" },
+        { _id: "3", name: "Hawaiian", description: "Ham, pineapple, mozzarella", price: 15, category: "classic", popular: false, image: "" },
+        { _id: "4", name: "BBQ Chicken", description: "Grilled chicken, BBQ sauce, red onions", price: 16, category: "signature", popular: true, image: "" },
+        { _id: "5", name: "Truffle Mushroom", description: "Wild mushrooms, truffle oil, fontina", price: 18, category: "specialty", popular: false, image: "" },
+        { _id: "6", name: "Garlic Knots", description: "Freshly baked with marinara", price: 6, category: "sides", popular: false, image: "" },
       ]);
     }
 
@@ -120,6 +122,16 @@ export default function AdminPage() {
     document.body.removeChild(link);
   };
 
+  const useImageForPizza = () => {
+    if (!generatedImage) return;
+    setSelectedImageForPizza(generatedImage);
+    if (editingPizza) {
+      setEditingPizza({ ...editingPizza, image: generatedImage });
+    } else {
+      setNewPizza({ ...newPizza, image: generatedImage });
+    }
+  };
+
   const addPizza = () => {
     if (!newPizza.name || !newPizza.price) return;
     const pizza: PizzaItem = {
@@ -129,9 +141,11 @@ export default function AdminPage() {
       price: parseFloat(newPizza.price),
       category: newPizza.category,
       popular: newPizza.popular,
+      image: newPizza.image,
     };
     savePizzas([...pizzas, pizza]);
-    setNewPizza({ name: "", description: "", price: "", category: "classic", popular: false });
+    setNewPizza({ name: "", description: "", price: "", category: "classic", popular: false, image: "" });
+    setSelectedImageForPizza("");
   };
 
   const deletePizza = (id: string) => {
@@ -141,6 +155,12 @@ export default function AdminPage() {
   const updatePizza = (updated: PizzaItem) => {
     savePizzas(pizzas.map((p) => (p._id === updated._id ? updated : p)));
     setEditingPizza(null);
+    setSelectedImageForPizza("");
+  };
+
+  const startEdit = (pizza: PizzaItem) => {
+    setEditingPizza(pizza);
+    setSelectedImageForPizza(pizza.image || "");
   };
 
   const sendAssistantMessage = () => {
@@ -161,7 +181,7 @@ export default function AdminPage() {
       } else if (lower.includes("contact") || lower.includes("phone") || lower.includes("email")) {
         response = `Contact info: ${settings.phone}, ${settings.email}, ${settings.address}. Update these in Settings.`;
       } else if (lower.includes("help")) {
-        response = "I can help you with: 1) Managing menu items, 2) Generating images, 3) Updating site settings, 4) Answering questions about the website. Just ask!";
+        response = "I can help you with: 1) Managing menu items, 2) Generating images, 3) Updating settings, 4) Answering questions about the website. Just ask!";
       } else {
         response = "I understand. You can manage menu items, generate images, update settings, or ask me specific questions about the website. What would you like to do?";
       }
@@ -268,14 +288,21 @@ export default function AdminPage() {
               <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="mt-8">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-xl font-bold text-gray-900">Generated Image</h3>
-                  <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={downloadImage} className="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-amber-600 hover:to-orange-700 transition-all shadow-lg">
-                    <Download className="w-5 h-5" />
-                    Download
-                  </motion.button>
+                  <div className="flex gap-3">
+                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={useImageForPizza} className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-green-600 hover:to-emerald-700 transition-all shadow-lg">
+                      <LinkIcon className="w-5 h-5" />
+                      Use for Pizza
+                    </motion.button>
+                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={downloadImage} className="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-amber-600 hover:to-orange-700 transition-all shadow-lg">
+                      <Download className="w-5 h-5" />
+                      Download
+                    </motion.button>
+                  </div>
                 </div>
                 <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-lg">
                   <img src={generatedImage} alt="Generated" className="w-full h-auto" />
                 </div>
+                <p className="text-sm text-gray-500 mt-3">Tip: Click "Use for Pizza" then go to Menu Manager tab to assign this image to a pizza.</p>
               </motion.div>
             )}
 
@@ -315,6 +342,7 @@ export default function AdminPage() {
                   <option value="specialty">Specialty</option>
                   <option value="sides">Sides</option>
                 </select>
+                <input type="text" placeholder="Image URL (or generate in Images tab)" value={newPizza.image} onChange={(e) => setNewPizza({ ...newPizza, image: e.target.value })} className="p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-500" />
               </div>
               <div className="flex items-center gap-4">
                 <label className="flex items-center gap-2 cursor-pointer">
@@ -330,29 +358,37 @@ export default function AdminPage() {
             {/* Pizza List */}
             <div className="space-y-3">
               {pizzas.map((pizza) => (
-                <motion.div key={pizza._id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-amber-200 transition-colors">
+                <motion.div key={pizza._id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-amber-200 transition-colors">
                   {editingPizza?._id === pizza._id ? (
-                    <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-3">
-                      <input type="text" value={editingPizza.name} onChange={(e) => setEditingPizza({ ...editingPizza, name: e.target.value })} className="p-2 border border-gray-200 rounded-lg" />
-                      <input type="text" value={editingPizza.description} onChange={(e) => setEditingPizza({ ...editingPizza, description: e.target.value })} className="p-2 border border-gray-200 rounded-lg" />
-                      <input type="number" value={editingPizza.price} onChange={(e) => setEditingPizza({ ...editingPizza, price: parseFloat(e.target.value) })} className="p-2 border border-gray-200 rounded-lg" />
+                    <div className="flex-1 grid grid-cols-1 md:grid-cols-5 gap-3">
+                      <input type="text" value={editingPizza.name} onChange={(e) => setEditingPizza({ ...editingPizza, name: e.target.value })} placeholder="Name" className="p-2 border border-gray-200 rounded-lg" />
+                      <input type="text" value={editingPizza.description} onChange={(e) => setEditingPizza({ ...editingPizza, description: e.target.value })} placeholder="Description" className="p-2 border border-gray-200 rounded-lg" />
+                      <input type="number" value={editingPizza.price.toString()} onChange={(e) => setEditingPizza({ ...editingPizza, price: parseFloat(e.target.value) || 0 })} placeholder="Price" className="p-2 border border-gray-200 rounded-lg" />
+                      <input type="text" value={editingPizza.image || ""} onChange={(e) => setEditingPizza({ ...editingPizza, image: e.target.value })} placeholder="Image URL" className="p-2 border border-gray-200 rounded-lg" />
                       <div className="flex gap-2">
                         <button onClick={() => updatePizza(editingPizza)} className="p-2 bg-green-500 text-white rounded-lg hover:bg-green-600"><Save className="w-4 h-4" /></button>
-                        <button onClick={() => setEditingPizza(null)} className="p-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"><X className="w-4 h-4" /></button>
+                        <button onClick={() => { setEditingPizza(null); setSelectedImageForPizza(""); }} className="p-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"><X className="w-4 h-4" /></button>
                       </div>
                     </div>
                   ) : (
                     <>
-                      <div className="flex-1">
+                      <div className="w-16 h-16 bg-gray-200 rounded-xl overflow-hidden flex-shrink-0">
+                        {pizza.image ? (
+                          <img src={pizza.image} alt={pizza.name} className="w-full h-full object-cover" />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-2xl">🍕</div>
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
-                          <h3 className="font-bold text-gray-900">{pizza.name}</h3>
-                          {pizza.popular && <span className="text-xs bg-amber-500 text-white px-2 py-0.5 rounded-full">Popular</span>}
+                          <h3 className="font-bold text-gray-900 truncate">{pizza.name}</h3>
+                          {pizza.popular && <span className="text-xs bg-amber-500 text-white px-2 py-0.5 rounded-full flex-shrink-0">Popular</span>}
                         </div>
-                        <p className="text-sm text-gray-600">{pizza.description}</p>
+                        <p className="text-sm text-gray-600 truncate">{pizza.description}</p>
                         <p className="text-sm text-amber-600 font-semibold">${pizza.price} • {pizza.category}</p>
                       </div>
-                      <div className="flex gap-2">
-                        <button onClick={() => setEditingPizza(pizza)} className="p-2 text-gray-600 hover:text-amber-600 transition-colors"><Edit2 className="w-5 h-5" /></button>
+                      <div className="flex gap-2 flex-shrink-0">
+                        <button onClick={() => startEdit(pizza)} className="p-2 text-gray-600 hover:text-amber-600 transition-colors"><Edit2 className="w-5 h-5" /></button>
                         <button onClick={() => deletePizza(pizza._id)} className="p-2 text-gray-600 hover:text-red-600 transition-colors"><Trash2 className="w-5 h-5" /></button>
                       </div>
                     </>
