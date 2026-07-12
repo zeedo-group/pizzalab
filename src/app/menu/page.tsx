@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import MenuCard from "@/components/MenuCard";
 import AnimatedSection from "@/components/AnimatedSection";
 import { useCart } from "@/context/CartContext";
-import { Pizza } from "lucide-react";
 
 interface PizzaData {
   _id: string;
@@ -49,7 +48,7 @@ export default function MenuPage() {
     <div className="pt-24 pb-12">
       {/* Hero */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-red-600 via-orange-500 to-yellow-500 animate-gradient" />
+        <div className="absolute inset-0 bg-aurora-hero animate-aurora opacity-90" />
         <div className="absolute inset-0 bg-pattern opacity-20" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
           <motion.div
@@ -81,7 +80,7 @@ export default function MenuPage() {
               onClick={() => setActiveCategory(cat)}
               className={`px-8 py-3 rounded-full font-semibold transition-all shadow-lg ${
                 activeCategory === cat
-                  ? "bg-gradient-to-r from-red-600 to-orange-600 text-white"
+                  ? "bg-shiny-orange text-white"
                   : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
               }`}
             >
@@ -95,7 +94,7 @@ export default function MenuPage() {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-              className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full"
+              className="w-16 h-16 border-4 border-amber-500 border-t-transparent rounded-full"
             />
           </div>
         ) : (

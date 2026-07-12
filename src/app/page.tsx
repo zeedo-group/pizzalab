@@ -9,15 +9,15 @@ export default function Home() {
     <div className="pt-16">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated background layers */}
-        <div className="absolute inset-0 bg-gradient-to-br from-red-600 via-orange-500 to-yellow-500 animate-gradient" />
-        <div className="absolute inset-0 bg-[url('/pizza-bg.svg')] bg-cover bg-center opacity-30 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-aurora-hero animate-aurora opacity-90" />
         <div className="absolute inset-0 bg-pattern opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/30" />
         
-        {/* Floating decorative elements */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-20 right-10 w-48 h-48 bg-orange-300/20 rounded-full blur-3xl animate-float" style={{ animationDelay: "1s" }} />
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-red-300/20 rounded-full blur-2xl animate-float" style={{ animationDelay: "2s" }} />
+        {/* Floating aurora orbs */}
+        <div className="absolute top-20 left-10 w-32 h-32 bg-aurora-purple/30 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-20 right-10 w-48 h-48 bg-aurora-green/30 rounded-full blur-3xl animate-float" style={{ animationDelay: "1s" }} />
+        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-aurora-blue/30 rounded-full blur-2xl animate-float" style={{ animationDelay: "2s" }} />
+        <div className="absolute top-1/3 right-1/4 w-20 h-20 bg-aurora-pink/20 rounded-full blur-2xl animate-float" style={{ animationDelay: "1.5s" }} />
 
         <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
           <motion.div
@@ -57,13 +57,13 @@ export default function Home() {
           >
             <Link
               href="/menu"
-              className="group bg-white text-red-600 px-10 py-5 rounded-full font-bold text-xl hover:bg-gray-100 transition-all shadow-2xl hover:shadow-white/50 hover:scale-105 flex items-center justify-center gap-2"
+              className="group bg-white text-amber-600 px-10 py-5 rounded-full font-bold text-xl hover:bg-gray-100 transition-all shadow-2xl hover:shadow-white/50 hover:scale-105 flex items-center justify-center gap-2"
             >
               View Menu <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               href="/order"
-              className="border-2 border-white text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-white hover:text-red-600 transition-all shadow-2xl hover:scale-105"
+              className="border-2 border-white text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-white hover:text-amber-600 transition-all shadow-2xl hover:scale-105"
             >
               Order Now
             </Link>
@@ -78,9 +78,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Image Gallery Section */}
       <section className="py-24 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-orange-50/50 to-transparent" />
+        <div className="absolute inset-0 bg-aurora-subtle" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -88,7 +88,54 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
+            <h2 className="text-5xl font-bold mb-4 text-aurora-gradient">
+              Experience Pizza Lab
+            </h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              A glimpse into our world of authentic Italian pizza
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { title: "Our Kitchen", emoji: "👨‍🍳", desc: "Watch our pizzas being crafted" },
+              { title: "Fresh Ingredients", emoji: "🍅", desc: "Only the finest imports" },
+              { title: "Wood Fired Oven", emoji: "🔥", desc: "900°F authentic brick oven" },
+            ].map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.2 }}
+                whileHover={{ y: -10, scale: 1.02 }}
+                className="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+              >
+                <div className="h-64 placeholder-image text-6xl">
+                  {item.emoji}
+                </div>
+                <div className="p-6 bg-gradient-to-br from-amber-50 to-white">
+                  <h3 className="text-xl font-bold mb-2 text-gray-900">{item.title}</h3>
+                  <p className="text-gray-600">{item.desc}</p>
+                  <p className="text-xs text-amber-600 mt-2 font-medium">[Image placeholder - add your photo here]</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-24 bg-gradient-to-b from-white to-amber-50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-aurora-subtle opacity-50" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-5xl font-bold mb-4 text-aurora-gradient">
               Why Choose Us
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -102,19 +149,19 @@ export default function Home() {
                 icon: Flame, 
                 title: "Wood Fired", 
                 desc: "Authentic brick oven cooking at 900°F for that perfect char and flavor",
-                color: "from-red-500 to-orange-500"
+                color: "from-amber-400 to-orange-500"
               },
               { 
                 icon: Clock, 
                 title: "Fast Delivery", 
                 desc: "Hot and fresh to your door in 30 minutes or it's free",
-                color: "from-orange-500 to-yellow-500"
+                color: "from-aurora-green to-aurora-blue"
               },
               { 
                 icon: Award, 
                 title: "Award Winning", 
                 desc: "Voted best pizza in the city 2024 - three years running",
-                color: "from-red-600 to-red-500"
+                color: "from-aurora-purple to-aurora-pink"
               },
             ].map((feature, i) => (
               <motion.div
@@ -142,8 +189,8 @@ export default function Home() {
 
       {/* CTA Section */}
       <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-orange-600 animate-gradient" />
-        <div className="absolute inset-0 bg-dots" />
+        <div className="absolute inset-0 bg-shiny-orange animate-gradient" />
+        <div className="absolute inset-0 bg-pattern opacity-20" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -159,7 +206,7 @@ export default function Home() {
             </p>
             <Link
               href="/menu"
-              className="inline-flex items-center gap-2 bg-white text-red-600 px-10 py-4 rounded-full font-bold text-xl hover:bg-gray-100 transition-all shadow-xl hover:scale-105"
+              className="inline-flex items-center gap-2 bg-white text-amber-600 px-10 py-4 rounded-full font-bold text-xl hover:bg-gray-100 transition-all shadow-xl hover:scale-105"
             >
               Explore Menu <ChevronRight className="w-6 h-6" />
             </Link>

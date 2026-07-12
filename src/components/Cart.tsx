@@ -23,11 +23,11 @@ export default function Cart() {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: "100%", opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed right-0 top-0 h-full w-full max-w-md bg-gradient-to-b from-white to-gray-50 shadow-2xl z-50 flex flex-col"
+            className="fixed right-0 top-0 h-full w-full max-w-md bg-gradient-to-b from-white to-amber-50 shadow-2xl z-50 flex flex-col"
           >
             <div className="p-6 border-b border-gray-200 bg-white">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
+                <h2 className="text-2xl font-bold bg-shiny-orange bg-clip-text text-transparent">
                   Your Cart ({totalItems})
                 </h2>
                 <motion.button
@@ -60,7 +60,7 @@ export default function Cart() {
                       className="bg-white rounded-2xl p-4 shadow-md border border-gray-100"
                     >
                       <div className="flex items-center gap-4">
-                        <div className="w-20 h-20 bg-gradient-to-br from-red-100 to-orange-100 rounded-xl flex items-center justify-center text-3xl flex-shrink-0">
+                        <div className="w-20 h-20 bg-gradient-to-br from-amber-100 to-orange-100 rounded-xl flex items-center justify-center text-3xl flex-shrink-0">
                           {item.image?.asset?.url ? (
                             <img src={item.image.asset.url} alt={item.name} className="w-full h-full object-cover rounded-xl" />
                           ) : (
@@ -69,7 +69,7 @@ export default function Cart() {
                         </div>
                         <div className="flex-1 min-w-0">
                           <h3 className="font-bold text-gray-900 truncate">{item.name}</h3>
-                          <p className="text-red-600 font-bold text-lg">${item.price}</p>
+                          <p className="text-amber-600 font-bold text-lg">${item.price}</p>
                         </div>
                         <div className="flex items-center gap-2">
                           <motion.button
@@ -99,14 +99,14 @@ export default function Cart() {
               <div className="p-6 border-t border-gray-200 bg-white">
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-lg font-semibold text-gray-700">Subtotal</span>
-                  <span className="text-2xl font-bold bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
+                  <span className="text-2xl font-bold bg-shiny-orange bg-clip-text text-transparent">
                     ${totalPrice.toFixed(2)}
                   </span>
                 </div>
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full bg-gradient-to-r from-red-600 to-orange-600 text-white py-4 rounded-2xl font-bold text-lg hover:from-red-700 hover:to-orange-700 transition-all shadow-lg flex items-center justify-center gap-2"
+                  className="w-full bg-shiny-orange text-white py-4 rounded-2xl font-bold text-lg hover:opacity-90 transition-all shadow-lg flex items-center justify-center gap-2"
                   onClick={() => dispatch({ type: "TOGGLE_CART" })}
                 >
                   Checkout

@@ -34,7 +34,7 @@ export default function OrderPage() {
     <div className="pt-24 pb-12">
       {/* Hero */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-red-600 via-orange-600 to-yellow-600 animate-gradient" />
+        <div className="absolute inset-0 bg-aurora-hero animate-aurora opacity-90" />
         <div className="absolute inset-0 bg-pattern opacity-20" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
           <motion.div
@@ -62,8 +62,8 @@ export default function OrderPage() {
             className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-100"
           >
             <div className="flex items-center gap-3 mb-8">
-              <Sparkles className="w-8 h-8 text-red-600" />
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
+              <Sparkles className="w-8 h-8 text-amber-500" />
+              <h2 className="text-3xl font-bold bg-shiny-orange bg-clip-text text-transparent">
                 Your Order
               </h2>
             </div>
@@ -87,10 +87,10 @@ export default function OrderPage() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.1 }}
-                      className="flex items-center justify-between p-5 bg-gradient-to-r from-gray-50 to-white rounded-2xl border border-gray-100 hover:border-red-200 transition-colors"
+                      className="flex items-center justify-between p-5 bg-gradient-to-r from-amber-50 to-white rounded-2xl border border-gray-100 hover:border-amber-200 transition-colors"
                     >
                       <div className="flex items-center gap-4">
-                        <div className="w-16 h-16 bg-gradient-to-br from-red-100 to-orange-100 rounded-xl flex items-center justify-center text-3xl">
+                        <div className="w-16 h-16 bg-gradient-to-br from-amber-100 to-orange-100 rounded-xl flex items-center justify-center text-3xl">
                           {item.image?.asset?.url ? (
                             <img src={item.image.asset.url} alt={item.name} className="w-full h-full object-cover rounded-xl" />
                           ) : (
@@ -102,7 +102,7 @@ export default function OrderPage() {
                           <p className="text-gray-500 text-sm">Qty: {item.quantity}</p>
                         </div>
                       </div>
-                      <p className="font-bold text-xl bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
+                      <p className="font-bold text-xl bg-shiny-orange bg-clip-text text-transparent">
                         ${(item.price * item.quantity).toFixed(2)}
                       </p>
                     </motion.div>
@@ -112,7 +112,7 @@ export default function OrderPage() {
                 <div className="border-t-2 border-dashed border-gray-200 pt-6 mb-8">
                   <div className="flex justify-between items-center text-2xl font-bold">
                     <span className="text-gray-900">Total</span>
-                    <span className="bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
+                    <span className="bg-shiny-orange bg-clip-text text-transparent">
                       ${totalPrice.toFixed(2)}
                     </span>
                   </div>
@@ -123,7 +123,7 @@ export default function OrderPage() {
                   whileTap={{ scale: 0.98 }}
                   onClick={handleCheckout}
                   disabled={loading || state.items.length === 0}
-                  className="w-full bg-gradient-to-r from-red-600 to-orange-600 text-white py-5 rounded-2xl font-bold text-xl hover:from-red-700 hover:to-orange-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                  className="w-full bg-shiny-orange text-white py-5 rounded-2xl font-bold text-xl hover:opacity-90 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
                 >
                   {loading ? (
                     <>

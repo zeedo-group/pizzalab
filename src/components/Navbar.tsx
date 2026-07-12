@@ -17,7 +17,7 @@ export default function Navbar() {
       transition={{ duration: 0.5 }}
       className="fixed top-0 left-0 right-0 z-50"
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-red-600 via-orange-500 to-red-600 animate-gradient opacity-95" />
+      <div className="absolute inset-0 bg-shiny-orange animate-gradient opacity-95" />
       <div className="absolute inset-0 bg-white/10 backdrop-blur-md" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -41,7 +41,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="relative text-white hover:text-red-100 transition-colors font-medium group"
+                className="relative text-white hover:text-amber-100 transition-colors font-medium group"
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all group-hover:w-full" />
@@ -54,14 +54,14 @@ export default function Navbar() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => dispatch({ type: "TOGGLE_CART" })}
-              className="relative p-2 text-white hover:text-red-100 transition-colors"
+              className="relative p-2 text-white hover:text-amber-100 transition-colors"
             >
               <ShoppingBag className="w-6 h-6" />
               {totalItems > 0 && (
                 <motion.span
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  className="absolute -top-1 -right-1 bg-white text-red-600 text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold shadow-lg"
+                  className="absolute -top-1 -right-1 bg-white text-amber-600 text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold shadow-lg"
                 >
                   {totalItems}
                 </motion.span>
@@ -70,7 +70,7 @@ export default function Navbar() {
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 text-white hover:text-red-100 transition-colors"
+              className="md:hidden p-2 text-white hover:text-amber-100 transition-colors"
             >
               {mobileOpen ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
             </button>
@@ -95,7 +95,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="block py-2 text-white hover:text-red-100 transition-colors font-medium"
+                className="block py-2 text-white hover:text-amber-100 transition-colors font-medium"
               >
                 {link.label}
               </Link>

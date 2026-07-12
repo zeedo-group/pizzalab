@@ -9,10 +9,10 @@ export default function AboutPage() {
     <div className="pt-16">
       {/* Hero Section */}
       <section className="relative h-[500px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-red-600 via-orange-600 to-yellow-600 animate-gradient" />
+        <div className="absolute inset-0 bg-aurora-hero animate-aurora opacity-90" />
         <div className="absolute inset-0 bg-pattern opacity-20" />
-        <div className="absolute top-10 left-10 w-40 h-40 bg-white/10 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-10 right-10 w-56 h-56 bg-orange-300/20 rounded-full blur-3xl animate-float" style={{ animationDelay: "1s" }} />
+        <div className="absolute top-10 left-10 w-40 h-40 bg-aurora-purple/30 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-10 right-10 w-56 h-56 bg-aurora-green/30 rounded-full blur-3xl animate-float" style={{ animationDelay: "1s" }} />
         
         <div className="relative z-10 text-center text-white px-4">
           <motion.div
@@ -43,8 +43,8 @@ export default function AboutPage() {
       </section>
 
       {/* Story Section */}
-      <section className="py-24 bg-gradient-to-b from-white to-orange-50 relative">
-        <div className="absolute inset-0 bg-dots opacity-30" />
+      <section className="py-24 bg-gradient-to-b from-white to-amber-50 relative">
+        <div className="absolute inset-0 bg-aurora-subtle opacity-30" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <AnimatedSection>
             <div className="prose prose-lg mx-auto text-center">
@@ -65,6 +65,16 @@ export default function AboutPage() {
                 Today, we continue that tradition using imported Italian flour, San Marzano tomatoes,
                 and fresh mozzarella. Every pizza is hand-tossed and wood-fired to perfection in our custom brick oven.
               </p>
+            </div>
+          </AnimatedSection>
+
+          {/* Image placeholder */}
+          <AnimatedSection delay={0.2}>
+            <div className="mb-16">
+              <div className="h-80 w-full placeholder-image text-6xl rounded-3xl">
+                👨‍🍳
+              </div>
+              <p className="text-center text-amber-600 text-sm mt-3 font-medium">[Add chef/kitchen photo here]</p>
             </div>
           </AnimatedSection>
 
@@ -95,7 +105,7 @@ export default function AboutPage() {
                   className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 text-center border border-gray-100"
                 >
                   <div className="text-5xl mb-4">{value.emoji}</div>
-                  <value.icon className="w-12 h-12 text-red-600 mx-auto mb-4" />
+                  <value.icon className="w-12 h-12 text-amber-600 mx-auto mb-4" />
                   <h3 className="text-xl font-bold mb-2 text-gray-900">{value.title}</h3>
                   <p className="text-gray-600">{value.desc}</p>
                 </motion.div>
@@ -106,7 +116,7 @@ export default function AboutPage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-24 bg-gradient-to-r from-red-600 via-orange-600 to-yellow-600 relative overflow-hidden">
+      <section className="py-24 bg-shiny-orange relative overflow-hidden">
         <div className="absolute inset-0 bg-pattern opacity-20" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
