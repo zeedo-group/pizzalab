@@ -37,6 +37,7 @@ export default function Navbar() {
               { href: "/about", label: "About" },
               { href: "/contact", label: "Contact" },
               { href: "/order", label: "Order Online" },
+              { href: "/admin", label: "Admin" },
             ].map((link) => (
               <Link
                 key={link.href}
@@ -90,6 +91,7 @@ export default function Navbar() {
               { href: "/about", label: "About" },
               { href: "/contact", label: "Contact" },
               { href: "/order", label: "Order Online" },
+              { href: "/admin", label: "Admin" },
             ].map((link) => (
               <Link
                 key={link.href}

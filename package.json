@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@google/genai": "^2.11.0",
     "@sanity/client": "^7.23.0",
     "@stripe/stripe-js": "^9.9.0",
     "framer-motion": "^12.42.2",
