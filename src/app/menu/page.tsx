@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
 import MenuCard from "@/components/MenuCard";
 import AnimatedSection from "@/components/AnimatedSection";
 import { useCart } from "@/context/CartContext";
-import { AnimatedHero, HERO_IMAGES } from "@/components/AnimatedHero";
 
 interface PizzaData {
   _id: string;
@@ -20,7 +21,7 @@ interface PizzaData {
 export default function MenuPage() {
   const [pizzas, setPizzas] = useState<PizzaData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState("all");
+  const [activeCategory, setActiveCategory] = useState("Signature Pizzas");
   const { dispatch } = useCart();
 
   useEffect(() => {
@@ -46,63 +47,190 @@ export default function MenuPage() {
     loadPizzas();
   }, []);
 
-  const categories = ["all", ...new Set(pizzas.map((p) => p.category))];
-  const filtered = activeCategory === "all" ? pizzas : pizzas.filter((p) => p.category === activeCategory);
+  const categories = ["Signature Pizzas", "Build Your Own", "Sides", "Drinks"];
+  const filtered = pizzas.filter((p) => p.category === "signature" || p.category === "classic" || p.category === "specialty" || p.category === "sides");
 
   const addToCart = (pizza: PizzaData) => {
     dispatch({ type: "ADD_ITEM", payload: { ...pizza, quantity: 1 } });
   };
 
-  return (
-    <div className="pt-16">
-      {/* Hero Section with Animated Image */}
-      <AnimatedHero
-        title="Our Menu"
-        subtitle="From classic Margherita to our signature creations, every pizza is made fresh to order."
-        imageUrl={HERO_IMAGES.menu}
-        imageAlt="Variety of artisan pizzas on wooden table"
-        animationType="zoom"
-        height="h-[450px]"
-      />
+  const menuImages = [
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuBVCGTDKVNOKxWpsFc8s2pp0xoNJP6OgkqROkdgA9OMUywYxFiE1J5hB1uf2Xw03D5IpcwiFwefpdmcqcGNAcfOtr17sNcXstMYdHbdvim94YNOrOzw6zlXAVI0gHyL2SGlX4coAKeNxt_Hs0M_k4hI1d8tWTJjSiOD8zDoBzqkOiHkixQjWECPaHPhYGDZ0Ki0FSOsQK3PhclCc5Vl6E82d8avzkoAfN95J9WnYP0Rj5yEyp155ojSiIqY8Cd5JpeilguQ0uFbMn7N",
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuBUI95m43wUPQf7GQu-aLYfUHs5neuri4nA5xmDfGeyAfnZesRl03x0thPerUaDYaz-FV8t2tvx1cMmFXa5Q9HEZ-mpvlhD0WYVVMhesp_IaS1oWv1aCOjOfbbZnsTbjjbnt2aGAcg7OY19jbkIxSzHy4P12BX1W-VTkkmk7VsBElMG78I2sH-CJY20B4zKAV24OoihjRCWXVFRH5cHy5Z8wRrk0ElC1uBckhY-gl1F2EoWgl_M2EPTiKpOf1yOnuC6GW8bBuc69cpw",
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuC32QsuPg0TJv2J4EdxpQRYbQz6Lb2PyAktjH9m0ORAw-3bWKwXYe8qJU43R1WZULNBSw2MN-j0aBiyCwHEvRLrHFNvXERuew-nrshuXuVJk4AKOqDscidawxTh9czK7J67DcrDU3iMJgn_UU535Eh2fRbleGJpknDiE3_pcJ4IrP-kCah0wckCpY4J4s40Pm3NO6HkRbH9URL_ut__rk0KiKUYoy7irguJN32DQzWq3UbsAm6rQAu61FTpA7M50gxue0Aii8GNA9FT",
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuAkP5tx5h0WrifUQSKqTtVKdIa7079UT0Jbw4MRWoLBvw2r1P9b5XLQkYDL3VbTboQeZkacKjOgMDzLd-foT91t7ZNsveZK7Rh23k5-vgFDArkR41nAjQ11D9bjoRN5ISTE-rLDcS5B-B1u9YhgOIzW6rSfqMm-v_xbJbxE-aHnU9062exxOlg40o07rYpMxf2tJ3sQCWzYNSWigqstFy6l2OzqijGnW9gRZAAreyezsuKNNTkr2gHV82fJqdFMwq7H9Zf5kJm9CYfk",
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuDN67i0MHnP_DLJtG3rQ7cj3qNaLWY1n7vfFabvJ-SOkEq6jWZ_nI6k6gH8SToEN-no4gGzfiGGAgdXo725uX41fvPeXf42hwBYRPA2UEZk-5gvty-RULUaZ6rUg91PGAyDxAA_mWjD8eI8naK2Fpovt_OxIbKBHuhR04eG1LceZSwb_G6lD8I31h4e2eUw500ko6xPwMSzAD1X8lDQz4WY6BeT_q00B-lpEeNcknQNW2Cm8-5tWcGwrcb-3umfJatVmrWSQKr0U5tV",
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuBvxIRyEzymCfnw5n3y7gppyj4mBVJcDxyxgc1x19TvjTMeavPTtETdofU5fgSqw6IxtRLUScF_I6Yvg98ZzeIAVx0TRno75mqq_gOKUtpCcbtbMgwHKfSb8ZsKEbo2nH1TVf4S1jxb0Ou88Vs-kyRue3PBZECqaf_5yhcsiM6UCAMb9Ws0WL41yBaCCXqSH5ra4_qDMMlcIN1u8ul8-4yuhabC8cP9IMTWWFKkHujDHKxp7xSmSTo4zf7EZQDw--AEQyC2PMn9FcEj",
+  ];
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
-        {/* Category Filters */}
-        <AnimatedSection className="flex flex-wrap justify-center gap-4 mb-12">
+  return (
+    <div className="pt-24 pb-12">
+      {/* Hero Header */}
+      <motion.section
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="px-margin-desktop py-20 max-w-container-max mx-auto text-center border-b border-outline-variant/10"
+      >
+        <h1 className="font-display-lg text-display-lg mb-6 text-flour-white">Our Menu</h1>
+        <p className="font-body-lg text-body-lg max-w-2xl mx-auto text-on-surface-variant">
+          Every creation at Pizza Lab is a product of scientific precision and Neapolitan soul. We utilize a 72-hour fermentation process and 900°F wood-fired ovens to achieve the perfect leopard-spotted crust.
+        </p>
+      </motion.section>
+
+      {/* Category Tabs */}
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.1 }}
+        className="sticky top-[73px] z-40 bg-background/95 backdrop-blur-sm border-b border-outline-variant/20"
+      >
+        <div className="flex justify-center items-center gap-8 py-6 px-margin-desktop overflow-x-auto whitespace-nowrap scrollbar-hide">
           {categories.map((cat) => (
-            <motion.button
+            <button
               key={cat}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               onClick={() => setActiveCategory(cat)}
-              className={`px-8 py-3 rounded-full font-semibold transition-all shadow-lg ${
+              className={`font-label-lg text-label-lg pb-2 transition-colors ${
                 activeCategory === cat
-                  ? "bg-shiny-orange text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
+                  ? "text-secondary border-b-2 border-secondary"
+                  : "text-on-surface-variant hover:text-flour-white"
               }`}
             >
-              {cat.charAt(0).toUpperCase() + cat.slice(1)}
-            </motion.button>
+              {cat}
+            </button>
           ))}
-        </AnimatedSection>
+        </div>
+      </motion.div>
 
-        {loading ? (
-          <div className="flex justify-center items-center h-64">
+      {/* Specialty Highlight: Bento Section */}
+      <motion.section
+        initial={{ y: 20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        className="px-margin-desktop py-16 max-w-container-max mx-auto"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+          <div className="lg:col-span-8 group relative overflow-hidden rounded-xl border border-outline-variant/20 bg-charcoal-slate transition-all hover:border-award-gold/50 h-[450px]">
+            <div className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${menuImages[0]})` }} />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+            <div className="absolute top-6 left-6 z-10">
+              <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-award-gold text-on-primary-fixed font-label-lg text-label-lg uppercase tracking-wider">
+                <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                Chef's Choice
+              </span>
+            </div>
+            <div className="absolute bottom-10 left-10 z-10 max-w-lg">
+              <h3 className="font-headline-lg text-headline-lg text-flour-white mb-2">The Truffle Alchemy</h3>
+              <p className="font-body-md text-body-md text-on-surface-variant mb-6">
+                A decadent blend of black truffle cream, buffalo mozzarella, wild porcini mushrooms, and 24-month aged Parmigiano Reggiano. Finished with a drizzle of white truffle oil.
+              </p>
+              <div className="flex items-center gap-6">
+                <span className="font-headline-md text-headline-md text-secondary">$24.00</span>
+                <button className="bg-oven-ember text-flour-white px-8 py-3 rounded-lg font-label-lg text-label-lg hover:brightness-110 transition-all flex items-center gap-2">
+                  Add to Order
+                  <span className="material-symbols-outlined">shopping_cart</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="lg:col-span-4 flex flex-col justify-center p-10 bg-basil-green/10 rounded-xl border border-basil-green/30">
+            <span className="material-symbols-outlined text-basil-green text-5xl mb-4">potted_plant</span>
+            <h4 className="font-headline-md text-headline-md text-basil-green mb-4">Plant-Based Mastery</h4>
+            <p className="font-body-md text-body-md text-on-surface-variant mb-6">
+              We don't compromise. Our house-made cashew mozzarella and fermentation-led dough ensure every vegan option is a scientific marvel of flavor.
+            </p>
+            <Link href="/menu" className="text-basil-green font-label-lg text-label-lg flex items-center gap-2 hover:underline">
+              Explore Vegan Menu
+              <span className="material-symbols-outlined text-sm">arrow_forward</span>
+            </Link>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Menu Grid */}
+      <motion.section
+        initial={{ y: 20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        className="px-margin-desktop py-16 max-w-container-max mx-auto"
+      >
+        <div className="flex items-baseline justify-between mb-12">
+          <h2 className="font-headline-lg text-headline-lg text-flour-white">Signature Pizzas</h2>
+          <span className="text-on-surface-variant font-label-md text-label-md uppercase tracking-widest">12 Items</span>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+          {filtered.map((pizza, i) => (
             <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-              className="w-16 h-16 border-4 border-amber-500 border-t-transparent rounded-full"
-            />
+              key={pizza._id}
+              initial={{ y: 30, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="group bg-charcoal-slate border border-outline-variant/10 rounded-xl overflow-hidden hover:border-secondary/30 transition-all duration-300"
+            >
+              <div className="h-64 overflow-hidden relative">
+                <Image
+                  src={menuImages[i % menuImages.length]}
+                  alt={pizza.name}
+                  fill
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+                {(pizza.category === "classic" || pizza.popular) && (
+                  <span className="absolute top-4 right-4 bg-basil-green/90 text-flour-white px-3 py-1 rounded-full text-label-md font-label-md">
+                    Vegetarian
+                  </span>
+                )}
+                {pizza.popular && (
+                  <span className="absolute top-4 right-4 bg-award-gold text-on-primary-fixed px-3 py-1 rounded-full text-label-md font-label-md uppercase tracking-tighter">
+                    Bestseller
+                  </span>
+                )}
+              </div>
+              <div className="p-6">
+                <div className="flex justify-between items-start mb-2">
+                  <h4 className="font-headline-md text-headline-md text-flour-white">{pizza.name}</h4>
+                  <span className="text-secondary font-headline-md text-headline-md">${pizza.price.toFixed(2)}</span>
+                </div>
+                <p className="text-on-surface-variant font-body-md text-body-md mb-6 leading-relaxed">
+                  {pizza.description}
+                </p>
+                <button
+                  onClick={() => addToCart(pizza)}
+                  className="w-full py-3 border border-award-gold/40 text-award-gold rounded-lg font-label-lg text-label-lg hover:bg-award-gold hover:text-on-primary-fixed transition-colors"
+                >
+                  Quick Add
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
+      {/* Process Highlight: Visual Break */}
+      <motion.section
+        initial={{ y: 20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        className="bg-surface-container-lowest py-24 border-y border-outline-variant/20"
+      >
+        <div className="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+          <div className="flex flex-col items-center">
+            <span className="material-symbols-outlined text-secondary text-5xl mb-6">science</span>
+            <h5 className="font-headline-md text-headline-md text-flour-white mb-2">72-Hour Ferment</h5>
+            <p className="font-body-md text-body-md text-on-surface-variant">Precision temperature control for a lighter, more digestible dough.</p>
           </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filtered.map((pizza, i) => (
-              <AnimatedSection key={pizza._id} delay={i * 0.1}>
-                <MenuCard {...pizza} onAddToCart={() => addToCart(pizza)} />
-              </AnimatedSection>
-            ))}
+          <div className="flex flex-col items-center">
+            <span className="material-symbols-outlined text-secondary text-5xl mb-6">local_fire_department</span>
+            <h5 className="font-headline-md text-headline-md text-flour-white mb-2">900°F Volcanic Ovens</h5>
+            <p className="font-body-md text-body-md text-on-surface-variant">Imported stone hearths from Vesuvius for that authentic leopard crust.</p>
           </div>
-        )}
-      </div>
+          <div className="flex flex-col items-center">
+            <span className="material-symbols-outlined text-secondary text-5xl mb-6">agriculture</span>
+            <h5 className="font-headline-md text-headline-md text-flour-white mb-2">Direct Trade Imports</h5>
+            <p className="font-body-md text-body-md text-on-surface-variant">We source tomatoes and oil directly from small farms in Campania.</p>
+          </div>
+        </div>
+      </motion.section>
     </div>
   );
 }
