@@ -58,7 +58,7 @@ export default function OrderPage() {
           </motion.div>
           <h2 className="font-display-lg text-display-lg text-flour-white mb-4">Order Confirmed!</h2>
           <p className="text-gray-300 mb-8 max-w-md mx-auto">
-            Your payment was successful. You'll receive a confirmation email shortly with your order details and estimated delivery time.
+            Your payment was successful. You&apos;ll receive a confirmation email shortly with your order details and estimated delivery time.
           </p>
           <button
             onClick={handleContinueShopping}
@@ -215,7 +215,7 @@ export default function OrderPage() {
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 text-center">
             <Truck className="w-8 h-8 text-award-gold mx-auto mb-3" />
             <h4 className="font-label-md text-label-md text-white mb-1">Fast Delivery</h4>
-            <p className="text-gray-400 text-sm">30 min or it's free</p>
+            <p className="text-gray-400 text-sm">30 min or it&apos;s free</p>
           </div>
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 text-center">
             <RotateCcw className="w-8 h-8 text-award-gold mx-auto mb-3" />

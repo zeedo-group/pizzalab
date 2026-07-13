@@ -6,8 +6,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 const localImages = {
-  heroOven: "/images/wood-oven.jpg",
-  mapLocation: "/images/kitchen-interior.jpg",
+  heroOven: "/images/wood-fire-oven.jpg",
+  mapLocation: "/images/pizza-kitchen.jpg",
 };
 
 export default function ContactPage() {
@@ -246,7 +246,7 @@ export default function ContactPage() {
                 </ul>
               </motion.div>
 
-              {/* Map Placeholder */}
+              {/* Venue Preview */}
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -255,14 +255,14 @@ export default function ContactPage() {
               >
                 <Image
                   src={localImages.mapLocation}
-                  alt="A highly detailed, cinematic drone view of a vibrant New York City street corner featuring the modern industrial storefront of Pizza Lab at dusk. Warm amber light glows from the large industrial windows, spilling onto the charcoal-colored sidewalk. The architectural style is a mix of exposed red brick and sleek black steel frames, perfectly capturing the professional yet warm atmosphere of the brand. Cinematic lighting creates long, soft shadows and highlights the high-contrast textures of the city."
+                  alt="A chef preparing a large artisan pizza in a warm professional kitchen."
                   fill
                   className="w-full h-full object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-background/40 flex items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity">
                   <div className="bg-charcoal-slate/80 backdrop-blur-sm px-6 py-3 rounded-full border border-award-gold/30 text-award-gold font-label-lg">
-                    NYC Laboratory Location
+                    Kitchen and Event Preview
                   </div>
                 </div>
               </motion.div>

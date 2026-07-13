@@ -128,7 +128,7 @@ export default function Home() {
               <div
                 className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                 style={{
-                  backgroundImage: "url('/images/wood-oven.jpg')",
+                  backgroundImage: "url('/images/wood-fire-oven.jpg')",
                 }}
                 data-alt="A close-up view of a traditional stone wood-fired oven with glowing orange embers and dancing flames inside. The intense heat is visible through the shimmering air, illuminating the rough texture of the dark stone oven. The mood is warm and grounded, evoking the ancient tradition of Neapolitan pizza making in a sophisticated dark-mode setting."
               />

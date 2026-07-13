@@ -5,9 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 const localImages = {
-  heroOven: "/images/wood-oven.jpg",
-  chefHands: "/images/chef-hands.jpg",
-  chefPortrait: "/images/kitchen-interior.jpg",
+  heroOven: "/images/wood-fire-oven.jpg",
+  chefHands: "/images/pizza-kitchen.jpg",
+  chefPortrait: "/images/pizza-kitchen.jpg",
   doughHands: "/images/pizza-closeup.jpg",
 };
 
@@ -54,7 +54,7 @@ export default function AboutPage() {
               transition={{ delay: 0.3 }}
               className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed"
             >
-              Where the raw precision of the lab meets the ancient warmth of the wood-fired hearth. We don't just make pizza; we engineer experiences.
+              Where the raw precision of the lab meets the ancient warmth of the wood-fired hearth. We don&apos;t just make pizza; we engineer experiences.
             </motion.p>
           </div>
         </div>
@@ -83,7 +83,7 @@ export default function AboutPage() {
                 <h2 className="font-headline-lg text-headline-lg text-flour-white">Tradition, Decoded.</h2>
                 <div className="h-1 w-20 bg-award-gold mt-4"></div>
                 <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed mt-6">
-                  Established in 2015, Pizza Lab was born from a singular obsession: the search for the perfect hydration ratio. We spent years in a literal workshop, testing flour varieties, fermentation timelines, and thermal dynamics until we found the "Golden Constant."
+                  Established in 2015, Pizza Lab was born from a singular obsession: the search for the perfect hydration ratio. We spent years in a literal workshop, testing flour varieties, fermentation timelines, and thermal dynamics until we found the &quot;Golden Constant.&quot;
                 </p>
                 <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
                   Today, we blend that technical rigor with a deep reverence for Neapolitan tradition. Every pizza is a hypothesis tested by fire, featuring ingredients sourced directly from small-scale volcanic farms in Campania and processed with modern culinary precision.
@@ -99,7 +99,7 @@ export default function AboutPage() {
               <div className="relative aspect-square bg-charcoal-slate rounded-xl border border-outline-variant/30 overflow-hidden shadow-2xl rotate-3">
                 <Image
                   src={localImages.doughHands}
-                  alt="A top-down, high-fidelity photograph of a professional marble countertop covered in a light dusting of white flour. A pair of expert hands is stretching a soft, perfectly fermented pizza dough ball. Beside the dough are high-quality ingredients like vibrant red San Marzano tomatoes, fresh green basil leaves, and artisanal olive oil in a sleek glass bottle. The lighting is focused and moody, highlighting the tactile textures of the food against the dark slate background."
+                  alt="A close-up of a finished artisan pizza with bubbling cheese, basil, mushrooms, and tomato on a dark kitchen counter."
                   fill
                   className="w-full h-full object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -201,7 +201,7 @@ export default function AboutPage() {
               <div className="aspect-[4/5] bg-surface-container-high rounded-xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
                 <Image
                   src={localImages.chefPortrait}
-                  alt="A sophisticated black and white portrait of a master pizzaiolo in a minimalist charcoal-colored apron. He is standing in a modern industrial kitchen with blurred stainless steel equipment in the background. His expression is focused and authoritative, holding a wooden pizza peel with expertise. The lighting is dramatic side-lighting that emphasizes the texture of his apron and the professional atmosphere. The image feels upscale and authentic, perfectly matching the Pizza Lab brand identity."
+                  alt="A chef preparing a large artisan pizza in a warm professional kitchen."
                   fill
                   className="w-full h-full object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -220,14 +220,14 @@ export default function AboutPage() {
             >
               <div className="space-y-2">
                 <span className="text-award-gold font-label-lg text-label-lg uppercase tracking-[0.2em]">Meet the Makers</span>
-                <h2 className="font-headline-lg text-headline-lg text-flour-white">Chef Marco Rossi</h2>
-                <p className="text-on-surface-variant font-label-md text-label-md italic">Head Pizzaiolo & Founder</p>
+                <h2 className="font-headline-lg text-headline-lg text-flour-white">The Pizza Lab Team</h2>
+                <p className="text-on-surface-variant font-label-md text-label-md italic">Pizzaioli, bakers, and flavor testers</p>
               </div>
               <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-                Marco Rossi isn't just a chef; he's a culinary architect. Trained in the backstreets of Naples before pursuing a degree in food science, Marco founded Pizza Lab to bridge the gap between soulful cooking and technical excellence.
+                Our team works like a small culinary studio: dough is tested daily, toppings are prepped in small batches, and every bake is judged by texture, aroma, and balance.
               </p>
               <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-                "The dough is a living organism," Marco says. "Our job in the Lab is to provide the perfect environment for it to thrive, then let the fire tell the rest of the story."
+                The result is a menu that feels handmade but consistent, with the warmth of a neighborhood pizzeria and the precision of a serious kitchen.
               </p>
               <div className="pt-8 flex gap-6">
                 <Link href="#" className="text-on-surface-variant hover:text-award-gold transition-colors">

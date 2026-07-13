@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Download, Copy, Check, Trash2, Edit2, Save, X, MessageSquare, Settings, Image as ImageIcon, Menu as MenuIcon, Link as LinkIcon, Upload } from "lucide-react";
 
@@ -25,6 +25,24 @@ interface SiteSettings {
   address: string;
 }
 
+const defaultPizzas: PizzaItem[] = [
+  { _id: "1", name: "Margherita", description: "Fresh mozzarella, tomato sauce, basil", price: 12, category: "classic", popular: true, image: "/images/pizza-closeup.jpg" },
+  { _id: "2", name: "Pepperoni", description: "Classic pepperoni with mozzarella", price: 14, category: "classic", popular: true, image: "/images/pizza-pepperoni.jpg" },
+  { _id: "3", name: "Garden Pizza", description: "Tomato, mushrooms, olives, basil, and mozzarella", price: 15, category: "classic", popular: false, image: "/images/pizza-veg.jpg" },
+  { _id: "4", name: "BBQ Chicken", description: "Grilled chicken, BBQ sauce, red onions", price: 16, category: "signature", popular: true, image: "/images/pizza-meat.jpg" },
+  { _id: "5", name: "Truffle Mushroom", description: "Wild mushrooms, truffle oil, fontina", price: 18, category: "specialty", popular: false, image: "/images/pizza-truffle.jpg" },
+  { _id: "6", name: "Wood-Fired Pepperoni", description: "Pepperoni, mozzarella, tomato sauce, and charred crust", price: 16, category: "signature", popular: false, image: "/images/wood-fire-oven.jpg" },
+];
+
+const defaultSettings: SiteSettings = {
+  siteName: "Pizza Lab",
+  heroTitle: "Pizza Lab",
+  heroSubtitle: "Authentic Italian flavors, crafted with passion and the finest ingredients.",
+  phone: "(555) 123-4567",
+  email: "hello@pizzalab.com",
+  address: "123 Pizza Street, Food City, FC 12345",
+};
+
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<TabType>("images");
   const [loading, setLoading] = useState(false);
@@ -35,19 +53,20 @@ export default function AdminPage() {
   const [generatedImage, setGeneratedImage] = useState<string | null>(null);
 
   // Menu Manager
-  const [pizzas, setPizzas] = useState<PizzaItem[]>([]);
+  const [pizzas, setPizzas] = useState<PizzaItem[]>(() => {
+    if (typeof window === "undefined") return defaultPizzas;
+    const saved = localStorage.getItem("pizzaLabMenu");
+    return saved ? JSON.parse(saved) : defaultPizzas;
+  });
   const [editingPizza, setEditingPizza] = useState<PizzaItem | null>(null);
   const [newPizza, setNewPizza] = useState({ name: "", description: "", price: "", category: "classic", popular: false, image: "" });
   const [selectedImageForPizza, setSelectedImageForPizza] = useState<string>("");
 
   // Settings
-  const [settings, setSettings] = useState<SiteSettings>({
-    siteName: "Pizza Lab",
-    heroTitle: "Pizza Lab",
-    heroSubtitle: "Authentic Italian flavors, crafted with passion and the finest ingredients.",
-    phone: "(555) 123-4567",
-    email: "hello@pizzalab.com",
-    address: "123 Pizza Street, Food City, FC 12345",
+  const [settings, setSettings] = useState<SiteSettings>(() => {
+    if (typeof window === "undefined") return defaultSettings;
+    const savedSettings = localStorage.getItem("pizzaLabSettings");
+    return savedSettings ? JSON.parse(savedSettings) : defaultSettings;
   });
 
   // AI Assistant
@@ -55,27 +74,6 @@ export default function AdminPage() {
     { role: "assistant", content: "Hi! I'm your AI assistant. I can help you manage the Pizza Lab website. Ask me about menu items, settings, images, or anything else!" }
   ]);
   const [assistantInput, setAssistantInput] = useState("");
-
-  useEffect(() => {
-    const saved = localStorage.getItem("pizzaLabMenu");
-    if (saved) {
-      setPizzas(JSON.parse(saved));
-    } else {
-      setPizzas([
-        { _id: "1", name: "Margherita", description: "Fresh mozzarella, tomato sauce, basil", price: 12, category: "classic", popular: true, image: "" },
-        { _id: "2", name: "Pepperoni", description: "Classic pepperoni with mozzarella", price: 14, category: "classic", popular: true, image: "" },
-        { _id: "3", name: "Hawaiian", description: "Ham, pineapple, mozzarella", price: 15, category: "classic", popular: false, image: "" },
-        { _id: "4", name: "BBQ Chicken", description: "Grilled chicken, BBQ sauce, red onions", price: 16, category: "signature", popular: true, image: "" },
-        { _id: "5", name: "Truffle Mushroom", description: "Wild mushrooms, truffle oil, fontina", price: 18, category: "specialty", popular: false, image: "" },
-        { _id: "6", name: "Garlic Knots", description: "Freshly baked with marinara", price: 6, category: "sides", popular: false, image: "" },
-      ]);
-    }
-
-    const savedSettings = localStorage.getItem("pizzaLabSettings");
-    if (savedSettings) {
-      setSettings(JSON.parse(savedSettings));
-    }
-  }, []);
 
   const savePizzas = (updated: PizzaItem[]) => {
     setPizzas(updated);
@@ -305,7 +303,7 @@ export default function AdminPage() {
                 <div className="rounded-2xl overflow-hidden border border-outline-variant/20 shadow-lg">
                   <img src={generatedImage} alt="Generated" className="w-full h-auto" />
                 </div>
-                <p className="text-sm text-on-surface-variant/60 mt-3">Tip: Click "Use for Pizza" then go to Menu Manager tab to assign this image to a pizza.</p>
+                <p className="text-sm text-on-surface-variant/60 mt-3">Tip: Click &quot;Use for Pizza&quot; then go to Menu Manager tab to assign this image to a pizza.</p>
               </motion.div>
             )}
 

@@ -37,8 +37,8 @@
   --line-height-label-lg: 20px;
   --line-height-label-md: 16px;
 
-  --letter-spacing-display-lg: -0.02em;
-  --letter-spacing-display-lg-mobile: -0.01em;
+  --letter-spacing-display-lg: 0;
+  --letter-spacing-display-lg-mobile: 0;
   --letter-spacing-label-lg: 0.05em;
 
   --font-weight-display: 700;
@@ -61,6 +61,8 @@
   --color-basil-green: #2D5A27;
   --color-charcoal-slate: #1A1A1A;
   --color-flour-white: #F9F9F9;
+  --color-on-primary-fixed: #1A1A1A;
+  --color-on-secondary: #1A1A1A;
 
   --color-surface-container: #1e2020;
   --color-surface-container-low: #1a1c1c;
@@ -148,10 +150,13 @@
 .text-flour-white { color: var(--color-flour-white); }
 .text-oven-ember { color: var(--color-oven-ember); }
 .text-award-gold { color: var(--color-award-gold); }
+.text-secondary { color: var(--color-award-gold); }
 .text-basil-green { color: var(--color-basil-green); }
 .text-charcoal-slate { color: var(--color-charcoal-slate); }
 .text-on-surface { color: var(--color-on-surface); }
 .text-on-surface-variant { color: var(--color-on-surface-variant); }
+.text-on-primary-fixed { color: var(--color-on-primary-fixed); }
+.text-on-secondary { color: var(--color-on-secondary); }
 .text-outline { color: var(--color-outline); }
 .text-outline-variant { color: var(--color-outline-variant); }
 
@@ -166,6 +171,7 @@
 .bg-charcoal-slate { background-color: var(--color-charcoal-slate); }
 .bg-oven-ember { background-color: var(--color-oven-ember); }
 .bg-award-gold { background-color: var(--color-award-gold); }
+.bg-secondary { background-color: var(--color-award-gold); }
 .bg-basil-green { background-color: var(--color-basil-green); }
 .bg-basil-green\/10 { background-color: rgba(45, 90, 39, 0.1); }
 .bg-oven-ember\/10 { background-color: rgba(211, 84, 0, 0.1); }
@@ -189,6 +195,7 @@
 .border-award-gold\/40 { border-color: rgba(197, 160, 89, 0.4); }
 .border-award-gold\/50 { border-color: rgba(197, 160, 89, 0.5); }
 .border-award-gold\/30 { border-color: rgba(197, 160, 89, 0.3); }
+.border-secondary { border-color: var(--color-award-gold); }
 .border-basil-green\/30 { border-color: rgba(45, 90, 39, 0.3); }
 .border-secondary\/30 { border-color: rgba(255, 181, 149, 0.3); }
 .border-white\/10 { border-color: rgba(255, 255, 255, 0.1); }
@@ -302,7 +309,18 @@
 
 /* Material symbols */
 .material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Selection */

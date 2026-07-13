@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import MenuCard from "@/components/MenuCard";
-import AnimatedSection from "@/components/AnimatedSection";
 import { useCart } from "@/context/CartContext";
 
 interface PizzaData {
@@ -27,11 +25,29 @@ const localMenuImages = [
   "/images/pizza-white.jpg",
   "/images/pizza-veg.jpg",
   "/images/pizza-closeup.jpg",
-  "/images/ingredients.jpg",
-  "/images/kitchen-interior.jpg",
-  "/images/wood-oven.jpg",
-  "/images/chef-hands.jpg",
 ];
+
+function getImageUrl(image?: { asset?: { url?: string } } | string): string | undefined {
+  if (!image) return undefined;
+  if (typeof image === "string") return image;
+  return image.asset?.url;
+}
+
+function getMenuImage(pizza: PizzaData, index: number): string {
+  const providedImage = getImageUrl(pizza.image);
+  if (providedImage) return providedImage;
+
+  const normalized = pizza.name.toLowerCase();
+  if (normalized.includes("truffle") || normalized.includes("mushroom")) return "/images/pizza-truffle.jpg";
+  if (normalized.includes("pepperoni")) return "/images/pizza-pepperoni.jpg";
+  if (normalized.includes("vegan") || normalized.includes("veg")) return "/images/pizza-veg.jpg";
+  if (normalized.includes("seafood")) return "/images/pizza-seafood.jpg";
+  if (normalized.includes("meat") || normalized.includes("bbq") || normalized.includes("chicken")) return "/images/pizza-meat.jpg";
+  if (normalized.includes("white") || normalized.includes("cheese")) return "/images/pizza-white.jpg";
+  if (normalized.includes("margherita") || normalized.includes("classic")) return "/images/pizza-closeup.jpg";
+
+  return localMenuImages[index % localMenuImages.length];
+}
 
 export default function MenuPage() {
   const [pizzas, setPizzas] = useState<PizzaData[]>([]);
@@ -63,7 +79,13 @@ export default function MenuPage() {
   }, []);
 
   const categories = ["Signature Pizzas", "Build Your Own", "Sides", "Drinks"];
-  const filtered = pizzas.filter((p) => p.category === "signature" || p.category === "classic" || p.category === "specialty" || p.category === "sides");
+  const filtered = pizzas.filter((pizza) => {
+    if (activeCategory === "Signature Pizzas") return ["signature", "classic", "specialty"].includes(pizza.category);
+    if (activeCategory === "Sides") return pizza.category === "sides";
+    if (activeCategory === "Build Your Own") return pizza.category === "build";
+    if (activeCategory === "Drinks") return pizza.category === "drinks";
+    return true;
+  });
 
   const addToCart = (pizza: PizzaData) => {
     dispatch({ type: "ADD_ITEM", payload: { ...pizza, quantity: 1 } });
@@ -121,7 +143,7 @@ export default function MenuPage() {
             <div className="absolute top-6 left-6 z-10">
               <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-award-gold text-on-primary-fixed font-label-lg text-label-lg uppercase tracking-wider">
                 <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                Chef's Choice
+                Chef&apos;s Choice
               </span>
             </div>
             <div className="absolute bottom-10 left-10 z-10 max-w-lg">
@@ -142,7 +164,7 @@ export default function MenuPage() {
             <span className="material-symbols-outlined text-basil-green text-5xl mb-4">potted_plant</span>
             <h4 className="font-headline-md text-headline-md text-basil-green mb-4">Plant-Based Mastery</h4>
             <p className="font-body-md text-body-md text-on-surface-variant mb-6">
-              We don't compromise. Our house-made cashew mozzarella and fermentation-led dough ensure every vegan option is a scientific marvel of flavor.
+              We don&apos;t compromise. Our house-made cashew mozzarella and fermentation-led dough ensure every vegan option is a scientific marvel of flavor.
             </p>
             <Link href="/menu" className="text-basil-green font-label-lg text-label-lg flex items-center gap-2 hover:underline">
               Explore Vegan Menu
@@ -161,7 +183,7 @@ export default function MenuPage() {
       >
         <div className="flex items-baseline justify-between mb-12">
           <h2 className="font-headline-lg text-headline-lg text-flour-white">Signature Pizzas</h2>
-          <span className="text-on-surface-variant font-label-md text-label-md uppercase tracking-widest">12 Items</span>
+          <span className="text-on-surface-variant font-label-md text-label-md uppercase tracking-widest">{filtered.length} Items</span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
           {filtered.map((pizza, i) => (
@@ -175,7 +197,7 @@ export default function MenuPage() {
             >
               <div className="h-64 overflow-hidden relative">
                 <Image
-                  src={localMenuImages[i % localMenuImages.length]}
+                  src={getMenuImage(pizza, i)}
                   alt={pizza.name}
                   fill
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
