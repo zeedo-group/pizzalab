@@ -5,6 +5,10 @@ import { motion } from "framer-motion";
 import { CreditCard, Lock, ShoppingBag, Sparkles, Shield, Truck, RotateCcw } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
+const localImages = {
+  heroPizza: "/images/pizza-closeup.jpg",
+};
+
 export default function OrderPage() {
   const { state, totalPrice, dispatch } = useCart();
   const [loading, setLoading] = useState(false);
@@ -79,8 +83,7 @@ export default function OrderPage() {
           <div
             className="w-full h-full bg-cover bg-center"
             style={{
-              backgroundImage:
-                "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBVCGTDKVNOKxWpsFc8s2pp0xoNJP6OgkqROkdgA9OMUywYxFiE1J5hB1uf2Xw03D5IpcwiFwefpdmcqcGNAcfOtr17sNcXstMYdHbdvim94YNOrOzw6zlXAVI0gHyL2SGlX4coAKeNxt_Hs0M_k4hI1d8tWTJjSiOD8zDoBzqkOiHkixQjWECPaHPhYGDZ0Ki0FSOsQK3PhclCc5Vl6E82d8avzkoAfN95J9WnYP0Rj5yEyp155ojSiIqY8Cd5JpeilguQ0uFbMn7N')",
+              backgroundImage: `url(${localImages.heroPizza})`,
             }}
             data-alt="A classic Neapolitan Margherita Verace pizza with vibrant red San Marzano sauce, white spots of melted buffalo mozzarella, and bright green basil leaves. The crust has distinct charred spots (leopard spotting) and is resting on a dark slate surface. Professional food photography, high contrast, warm rustic lighting."
           />

@@ -13,8 +13,7 @@ export default function Home() {
           <div
             className="w-full h-full bg-cover bg-center"
             style={{
-              backgroundImage:
-                "url('https://lh3.googleusercontent.com/aida-public/AB6AXuABSKeTd6mpu7k1OVrAojEgpc2vO-gi4hkBvCxOAO_xn4z61XSNIexFcCbguzhMpDwj1dniQuF6V1EmkpQA0VvDP282JNxJleArWQRVsA5pAeDtDUot6oyf6Pa6uOG2YKyaUgDT1Ei05xZpAsShdZh9xpq4Xz2TZcbXNtm7N4y6NZ2HYZ5LWBTc9wrHb1-OzR1_hL6rmTjiq50r6JlaEMxNTlzZt1y8KBUZGRjc6swYcaDwoAHLU-9W-Cbgr-9y74gdzUaM_KVFMf2c')",
+              backgroundImage: "url('/images/pizza-closeup.jpg')",
             }}
             data-alt="A cinematic, top-down high-fidelity photograph of an authentic Neapolitan pizza with charred crust bubbles and fresh bubbling mozzarella. The scene is set in a dark, moody industrial kitchen with low-key lighting and warm amber glows coming from a wood-fired oven in the background. The aesthetic is professional and sophisticated, featuring rich textures of flour dusting and fresh basil leaves on a charcoal slate surface."
           />
@@ -89,8 +88,7 @@ export default function Home() {
               <div
                 className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                 style={{
-                  backgroundImage:
-                    "url('https://lh3.googleusercontent.com/aida-public/AB6AXuAp10MQTvnBO043wdpJAYpXvbyNNLM-7KwHQIwzcNmCw3dw4LNQ3iNAFmQLbGipPmpQfUrykUZYW2qwQki0G4SRhWFaHPMsOzOIYVQ0toox0OZPlTuAnqPMtkHYP-ldjxF-qn4TmmuYrL5_VIeiOVTd_WB7n3vZ1Pb221XiPrUEU27JITzAnpfYRHHwahUIRQE5ZnatYQq1ufEVjK_NN3hUChe5UovdLF0QAQRBP9JjZWe_Lwiw4hUQ3DDZ0YijhXnCDSTTRrlQe0l8')",
+                  backgroundImage: "url('/images/kitchen-interior.jpg')",
                 }}
                 data-alt="A wide-angle shot of a modern industrial professional kitchen with stainless steel workstations and warm pendant lighting. Chefs in dark aprons are meticulously preparing artisanal pizza dough in a clean, sophisticated environment dominated by charcoal slates and dark metals. The atmosphere is professional, authoritative, and focused on culinary precision."
               />
@@ -110,8 +108,7 @@ export default function Home() {
               <div
                 className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                 style={{
-                  backgroundImage:
-                    "url('https://lh3.googleusercontent.com/aida-public/AB6AXuC69STUPF-y_nmXH0qZ87NdfC00z83wSMFhe9j5tw0asu5fhMZieBu1Bo7TkOMgfpfIZzF5-NsVawYtWJK1k7JbAsdB4rjpOOVM_Tcq7gDL9TL9NvI-kIwqRNSxwuHb-7K80j6YksB2OX-_F8ZUZGskklBtaj3_IkamE1-xrkw8ZE5zThaqJz0N7DhAr-l7H8MP_AAdO-UJ44NZhI-ZewSLixN-QfcBfUQT-XJcahW8eNNRWDyF60Hp4vDXmy7N_b9l3EEt9EXBoFUz')",
+                  backgroundImage: "url('/images/ingredients.jpg')",
                 }}
                 data-alt="A high-contrast macro shot of vibrant red San Marzano tomatoes, fresh green basil leaves, and artisanal buffalo mozzarella balls on a dark stone surface. Soft natural lighting highlights the dewy textures and vivid colors of the ingredients, emphasizing freshness and quality. The color palette features deep greens, rich reds, and creamy whites against a charcoal background."
               />
@@ -131,8 +128,7 @@ export default function Home() {
               <div
                 className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                 style={{
-                  backgroundImage:
-                    "url('https://lh3.googleusercontent.com/aida-public/AB6AXuA40xsms5r5S3zPtmf_pDyYnP9My9gY__2s4VlsJ7-OP4zbnpZjxuS9NhkQ2PFJy84gE7tMwIjvfqKvCBtlPvVt1E9KLE4QCPWQsncTux7U0Kd9cY9Kz9jHa6KnpZ-Di6ZiVmi_V7vjZoxxfZz_CO6Cp1nORqwIqmIs_wKmie6Yve-OJT13rvf7aXz13xtw4MJiVcO7XJNdoskuixcAxkaamsicNj2fUMKI4jVXchi7WlDicpAWYM6rB6JgadkofhILVvXiH3FTs4KW')",
+                  backgroundImage: "url('/images/wood-oven.jpg')",
                 }}
                 data-alt="A close-up view of a traditional stone wood-fired oven with glowing orange embers and dancing flames inside. The intense heat is visible through the shimmering air, illuminating the rough texture of the dark stone oven. The mood is warm and grounded, evoking the ancient tradition of Neapolitan pizza making in a sophisticated dark-mode setting."
               />

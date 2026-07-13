@@ -3,6 +3,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
+
+const localImages = {
+  heroOven: "/images/wood-oven.jpg",
+  mapLocation: "/images/kitchen-interior.jpg",
+};
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -38,8 +44,7 @@ export default function ContactPage() {
           <div
             className="w-full h-full bg-cover bg-center parallax-bg brightness-[0.4]"
             style={{
-              backgroundImage:
-                "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCbBEV2CTSCJkwZXIcmqmKwt5BsGvqkL9L_Y5NK2sz5d2_AM6ag1JJGAvsGa9thlyhhNWkgcSnH8LWNd5At_8xe-FmZmTBr8NpUc9hk8AniyyULvy3v0r1uk6sQleJJ9wUKLSfueebvDpFtl1EnrEH77PC0lIEnzmk0ZLInZf4lJdCQbsl9MSA5HXAMVxDLg6rsy6L_0TfI4H54GJicnBbOk5ItnQ92ieTUHCrf4gxQhMkRz0FXk7CY3Zr8WuMW4DBnBfQLIlSv35C5')",
+              backgroundImage: `url(${localImages.heroOven})`,
             }}
             data-alt="A cinematic, high-contrast close-up of an authentic wood-fired brick oven in a professional kitchen. Glowing orange embers and dancing flames illuminate the textured charcoal bricks. The scene is filled with a soft haze of heat and wood smoke, creating a sophisticated, industrial-chic atmosphere. The color palette is dominated by deep blacks, charcoal slates, and vibrant terracotta oranges, reflecting the professional and authoritative brand identity of Pizza Lab."
           />
@@ -248,13 +253,12 @@ export default function ContactPage() {
                 transition={{ delay: 0.3 }}
                 className="rounded-xl overflow-hidden border border-outline-variant/30 grayscale hover:grayscale-0 transition-all duration-700 h-64 relative group"
               >
-                <div
-                  className="w-full h-full bg-cover bg-center"
-                  style={{
-                    backgroundImage:
-                      "url('https://lh3.googleusercontent.com/aida-public/AB6AXuChnKhyY20tv2NuAb1KCA_eLUfGIoJZgEdND-OW4-p_4g95PlA_os9W79pl_IGWlvUETalXo4LIIsNl2gu3WUia7ILcAScFklLTf05lgNMCnUB5q5wE182ROX7W0h9bwx3Jkzohd_AR1oeCsURvu-QXPQSaYNSfVj5wi8B89cXE_iHBH2Hm4ny3-aUGmZuy9Ad7-XmqmaB_9ts-j7AbILl98jXgNt790dtcNIcd2gYmH5e35Lrhca0zr2JRFHv7gkD1R1uf_V1Vw8-f')",
-                  }}
-                  data-alt="A highly detailed, cinematic drone view of a vibrant New York City street corner featuring the modern industrial storefront of Pizza Lab at dusk. Warm amber light glows from the large industrial windows, spilling onto the charcoal-colored sidewalk. The architectural style is a mix of exposed red brick and sleek black steel frames, perfectly capturing the professional yet warm atmosphere of the brand. Cinematic lighting creates long, soft shadows and highlights the high-contrast textures of the city."
+                <Image
+                  src={localImages.mapLocation}
+                  alt="A highly detailed, cinematic drone view of a vibrant New York City street corner featuring the modern industrial storefront of Pizza Lab at dusk. Warm amber light glows from the large industrial windows, spilling onto the charcoal-colored sidewalk. The architectural style is a mix of exposed red brick and sleek black steel frames, perfectly capturing the professional yet warm atmosphere of the brand. Cinematic lighting creates long, soft shadows and highlights the high-contrast textures of the city."
+                  fill
+                  className="w-full h-full object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-background/40 flex items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity">
                   <div className="bg-charcoal-slate/80 backdrop-blur-sm px-6 py-3 rounded-full border border-award-gold/30 text-award-gold font-label-lg">

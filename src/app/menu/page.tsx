@@ -18,6 +18,21 @@ interface PizzaData {
   category: string;
 }
 
+const localMenuImages = [
+  "/images/pizza-truffle.jpg",
+  "/images/pizza-pepperoni.jpg",
+  "/images/pizza-vegan.jpg",
+  "/images/pizza-seafood.jpg",
+  "/images/pizza-meat.jpg",
+  "/images/pizza-white.jpg",
+  "/images/pizza-veg.jpg",
+  "/images/pizza-closeup.jpg",
+  "/images/ingredients.jpg",
+  "/images/kitchen-interior.jpg",
+  "/images/wood-oven.jpg",
+  "/images/chef-hands.jpg",
+];
+
 export default function MenuPage() {
   const [pizzas, setPizzas] = useState<PizzaData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -53,15 +68,6 @@ export default function MenuPage() {
   const addToCart = (pizza: PizzaData) => {
     dispatch({ type: "ADD_ITEM", payload: { ...pizza, quantity: 1 } });
   };
-
-  const menuImages = [
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuBVCGTDKVNOKxWpsFc8s2pp0xoNJP6OgkqROkdgA9OMUywYxFiE1J5hB1uf2Xw03D5IpcwiFwefpdmcqcGNAcfOtr17sNcXstMYdHbdvim94YNOrOzw6zlXAVI0gHyL2SGlX4coAKeNxt_Hs0M_k4hI1d8tWTJjSiOD8zDoBzqkOiHkixQjWECPaHPhYGDZ0Ki0FSOsQK3PhclCc5Vl6E82d8avzkoAfN95J9WnYP0Rj5yEyp155ojSiIqY8Cd5JpeilguQ0uFbMn7N",
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuBUI95m43wUPQf7GQu-aLYfUHs5neuri4nA5xmDfGeyAfnZesRl03x0thPerUaDYaz-FV8t2tvx1cMmFXa5Q9HEZ-mpvlhD0WYVVMhesp_IaS1oWv1aCOjOfbbZnsTbjjbnt2aGAcg7OY19jbkIxSzHy4P12BX1W-VTkkmk7VsBElMG78I2sH-CJY20B4zKAV24OoihjRCWXVFRH5cHy5Z8wRrk0ElC1uBckhY-gl1F2EoWgl_M2EPTiKpOf1yOnuC6GW8bBuc69cpw",
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuC32QsuPg0TJv2J4EdxpQRYbQz6Lb2PyAktjH9m0ORAw-3bWKwXYe8qJU43R1WZULNBSw2MN-j0aBiyCwHEvRLrHFNvXERuew-nrshuXuVJk4AKOqDscidawxTh9czK7J67DcrDU3iMJgn_UU535Eh2fRbleGJpknDiE3_pcJ4IrP-kCah0wckCpY4J4s40Pm3NO6HkRbH9URL_ut__rk0KiKUYoy7irguJN32DQzWq3UbsAm6rQAu61FTpA7M50gxue0Aii8GNA9FT",
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuAkP5tx5h0WrifUQSKqTtVKdIa7079UT0Jbw4MRWoLBvw2r1P9b5XLQkYDL3VbTboQeZkacKjOgMDzLd-foT91t7ZNsveZK7Rh23k5-vgFDArkR41nAjQ11D9bjoRN5ISTE-rLDcS5B-B1u9YhgOIzW6rSfqMm-v_xbJbxE-aHnU9062exxOlg40o07rYpMxf2tJ3sQCWzYNSWigqstFy6l2OzqijGnW9gRZAAreyezsuKNNTkr2gHV82fJqdFMwq7H9Zf5kJm9CYfk",
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuDN67i0MHnP_DLJtG3rQ7cj3qNaLWY1n7vfFabvJ-SOkEq6jWZ_nI6k6gH8SToEN-no4gGzfiGGAgdXo725uX41fvPeXf42hwBYRPA2UEZk-5gvty-RULUaZ6rUg91PGAyDxAA_mWjD8eI8naK2Fpovt_OxIbKBHuhR04eG1LceZSwb_G6lD8I31h4e2eUw500ko6xPwMSzAD1X8lDQz4WY6BeT_q00B-lpEeNcknQNW2Cm8-5tWcGwrcb-3umfJatVmrWSQKr0U5tV",
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuBvxIRyEzymCfnw5n3y7gppyj4mBVJcDxyxgc1x19TvjTMeavPTtETdofU5fgSqw6IxtRLUScF_I6Yvg98ZzeIAVx0TRno75mqq_gOKUtpCcbtbMgwHKfSb8ZsKEbo2nH1TVf4S1jxb0Ou88Vs-kyRue3PBZECqaf_5yhcsiM6UCAMb9Ws0WL41yBaCCXqSH5ra4_qDMMlcIN1u8ul8-4yuhabC8cP9IMTWWFKkHujDHKxp7xSmSTo4zf7EZQDw--AEQyC2PMn9FcEj",
-  ];
 
   return (
     <div className="pt-24 pb-12">
@@ -110,7 +116,7 @@ export default function MenuPage() {
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
           <div className="lg:col-span-8 group relative overflow-hidden rounded-xl border border-outline-variant/20 bg-charcoal-slate transition-all hover:border-award-gold/50 h-[450px]">
-            <div className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${menuImages[0]})` }} />
+            <div className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${localMenuImages[0]})` }} />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
             <div className="absolute top-6 left-6 z-10">
               <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-award-gold text-on-primary-fixed font-label-lg text-label-lg uppercase tracking-wider">
@@ -169,7 +175,7 @@ export default function MenuPage() {
             >
               <div className="h-64 overflow-hidden relative">
                 <Image
-                  src={menuImages[i % menuImages.length]}
+                  src={localMenuImages[i % localMenuImages.length]}
                   alt={pizza.name}
                   fill
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"

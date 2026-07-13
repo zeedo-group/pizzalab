@@ -4,6 +4,13 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
+const localImages = {
+  heroOven: "/images/wood-oven.jpg",
+  chefHands: "/images/chef-hands.jpg",
+  chefPortrait: "/images/kitchen-interior.jpg",
+  doughHands: "/images/pizza-closeup.jpg",
+};
+
 export default function AboutPage() {
   return (
     <div className="pt-16">
@@ -17,8 +24,7 @@ export default function AboutPage() {
           <div
             className="w-full h-full bg-cover bg-center"
             style={{
-              backgroundImage:
-                "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCbBEV2CTSCJkwZXIcmqmKwt5BsGvqkL9L_Y5NK2sz5d2_AM6ag1JJGAvsGa9thlyhhNWkgcSnH8LWNd5At_8xe-FmZmTBr8NpUc9hk8AniyyULvy3v0r1uk6sQleJJ9wUKLSfueebvDpFtl1EnrEH77PC0lIEnzmk0ZLInZf4lJdCQbsl9MSA5HXAMVxDLg6rsy6L_0TfI4H54GJicnBbOk5ItnQ92ieTUHCrf4gxQhMkRz0FXk7CY3Zr8WuMW4DBnBfQLIlSv35C5')",
+              backgroundImage: `url(${localImages.heroOven})`,
               filter: "brightness(0.4)",
             }}
             data-alt="A cinematic, high-contrast close-up of an authentic wood-fired brick oven in a professional kitchen. Glowing orange embers and dancing flames illuminate the textured charcoal bricks. The scene is filled with a soft haze of heat and wood smoke, creating a sophisticated, industrial-chic atmosphere. The color palette is dominated by deep blacks, charcoal slates, and vibrant terracotta oranges, reflecting the professional and authoritative brand identity of Pizza Lab."
@@ -92,7 +98,7 @@ export default function AboutPage() {
             >
               <div className="relative aspect-square bg-charcoal-slate rounded-xl border border-outline-variant/30 overflow-hidden shadow-2xl rotate-3">
                 <Image
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZyNqu3QD5-JaagyBafb4T-EYTUPN3hwwRUNdh4TVzFuONirYmqywnZTHuDqsGcgZhYDkY0FVYuHsKVfWYr-B5bX5mA5X3FTZx_DwUTlx8fTRa3hHbpVpY8OIZNzVbWu1TI6zVkBUqYW47YgfU0VzHyOuUH19U8Aq1aWxfMvqhCddk84XfgSRFgM1zYRiIbvsjaN1zTksVQShB_4r7sUnVLs3VjeYLXjasaUDoypOTgDNh5SPVoY6n-p8cK0qnNuwxffiMTyvhaU3R"
+                  src={localImages.doughHands}
                   alt="A top-down, high-fidelity photograph of a professional marble countertop covered in a light dusting of white flour. A pair of expert hands is stretching a soft, perfectly fermented pizza dough ball. Beside the dough are high-quality ingredients like vibrant red San Marzano tomatoes, fresh green basil leaves, and artisanal olive oil in a sleek glass bottle. The lighting is focused and moody, highlighting the tactile textures of the food against the dark slate background."
                   fill
                   className="w-full h-full object-cover"
@@ -194,7 +200,7 @@ export default function AboutPage() {
             >
               <div className="aspect-[4/5] bg-surface-container-high rounded-xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
                 <Image
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ8AV1UMBwRt6aGcvC0F0wDIVKVpkDKWkdK0vKcBG1grCLpZVMb1KJiEkZmcMa5arXTaSZoSezisl_wPqQOVKTCNvyVTlf6_mTVmzw_EWfVJD7sKV3vW2IwC4KXKfRfjSZQ46W0hyTG1i_TZbl7SX1jWo2ce0-6m4OrXWdjn6knuZzawPVh8XThn1KRTODsjiAWLpPM6Rid-ixXNm7oTLoY50xVt83_7Kgt1l_K4mPkw4d8EwPGczCFlwDGhccVd3wos-rw9GFbj6f"
+                  src={localImages.chefPortrait}
                   alt="A sophisticated black and white portrait of a master pizzaiolo in a minimalist charcoal-colored apron. He is standing in a modern industrial kitchen with blurred stainless steel equipment in the background. His expression is focused and authoritative, holding a wooden pizza peel with expertise. The lighting is dramatic side-lighting that emphasizes the texture of his apron and the professional atmosphere. The image feels upscale and authentic, perfectly matching the Pizza Lab brand identity."
                   fill
                   className="w-full h-full object-cover"
