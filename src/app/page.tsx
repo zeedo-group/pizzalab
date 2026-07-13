@@ -2,10 +2,32 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronRight, Flame, Clock, Award } from "lucide-react";
 import { HeroAnimation } from "@/components/HeroAnimation";
 
 export default function Home() {
+  const galleryItems = [
+    { 
+      title: "Our Kitchen", 
+      desc: "Watch our pizzas being crafted",
+      image: "/images/pizza-kitchen.jpg",
+      alt: "Pizza Lab kitchen - pizzas being crafted"
+    },
+    { 
+      title: "Fresh Ingredients", 
+      desc: "Only the finest imports",
+      image: "/hero-animation/ezgif-frame-127.jpg",
+      alt: "Fresh pizza ingredients - tomatoes, basil, mozzarella"
+    },
+    { 
+      title: "Wood Fired Oven", 
+      desc: "900°F authentic brick oven",
+      image: "/images/wood-fire-oven.jpg",
+      alt: "Wood fired pizza oven at 900°F"
+    },
+  ];
+
   return (
     <div className="pt-16">
       {/* Hero Animation Section */}
@@ -30,11 +52,7 @@ export default function Home() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { title: "Our Kitchen", emoji: "👨‍🍳", desc: "Watch our pizzas being crafted" },
-              { title: "Fresh Ingredients", emoji: "🍅", desc: "Only the finest imports" },
-              { title: "Wood Fired Oven", emoji: "🔥", desc: "900°F authentic brick oven" },
-            ].map((item, i) => (
+            {galleryItems.map((item, i) => (
               <motion.div
                 key={item.title}
                 initial={{ opacity: 0, y: 30 }}
@@ -44,13 +62,18 @@ export default function Home() {
                 whileHover={{ y: -10, scale: 1.02 }}
                 className="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
               >
-                <div className="h-64 placeholder-image text-6xl">
-                  {item.emoji}
+                <div className="relative h-64 overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.alt}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
                 </div>
                 <div className="p-6 bg-gradient-to-br from-amber-50 to-white">
                   <h3 className="text-xl font-bold mb-2 text-gray-900">{item.title}</h3>
                   <p className="text-gray-600">{item.desc}</p>
-                  <p className="text-xs text-amber-600 mt-2 font-medium">[Image placeholder - add your photo here]</p>
                 </div>
               </motion.div>
             ))}
