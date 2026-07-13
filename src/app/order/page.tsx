@@ -5,6 +5,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { motion } from "framer-motion";
 import { CreditCard, Lock, ShoppingBag, Sparkles } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { AnimatedHero, HERO_IMAGES } from "@/components/AnimatedHero";
 
 export default function OrderPage() {
   const { state, totalPrice } = useCart();
@@ -31,29 +32,15 @@ export default function OrderPage() {
   };
 
   return (
-    <div className="pt-24 pb-12">
-      {/* Hero */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-aurora-hero animate-aurora opacity-90" />
-        <div className="absolute inset-0 bg-pattern opacity-20" />
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="text-7xl mb-6 animate-float"
-          >
-            💳
-          </motion.div>
-          <AnimatedSection>
-            <h1 className="text-5xl md:text-6xl font-bold mb-4 text-white drop-shadow-lg">
-              Order Online
-            </h1>
-            <p className="text-xl text-white/90">
-              Secure checkout powered by Stripe
-            </p>
-          </AnimatedSection>
-        </div>
-      </section>
+    <div className="pt-16 pb-12">
+      <AnimatedHero
+        title="Order Online"
+        subtitle="Secure checkout powered by Stripe"
+        imageUrl={HERO_IMAGES.order}
+        imageAlt="Pizza delivery order"
+        animationType="zoom"
+        height="h-[400px]"
+      />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
         <AnimatedSection delay={0.2}>

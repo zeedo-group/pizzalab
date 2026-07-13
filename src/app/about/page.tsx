@@ -3,44 +3,20 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import { motion } from "framer-motion";
 import { Users, ChefHat, Heart, Star } from "lucide-react";
+import { AnimatedHero, HERO_IMAGES } from "@/components/AnimatedHero";
 
 export default function AboutPage() {
   return (
     <div className="pt-16">
-      {/* Hero Section */}
-      <section className="relative h-[500px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-aurora-hero animate-aurora opacity-90" />
-        <div className="absolute inset-0 bg-pattern opacity-20" />
-        <div className="absolute top-10 left-10 w-40 h-40 bg-aurora-purple/30 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-10 right-10 w-56 h-56 bg-aurora-green/30 rounded-full blur-3xl animate-float" style={{ animationDelay: "1s" }} />
-        
-        <div className="relative z-10 text-center text-white px-4">
-          <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ duration: 0.8, type: "spring" }}
-            className="text-7xl mb-6"
-          >
-            🍕
-          </motion.div>
-          <motion.h1
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-5xl md:text-6xl font-bold mb-4 drop-shadow-lg"
-          >
-            Our Story
-          </motion.h1>
-          <motion.p
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="text-xl max-w-2xl mx-auto"
-          >
-            Bringing authentic Italian pizza to your neighborhood since 2015
-          </motion.p>
-        </div>
-      </section>
+      {/* Hero Section with Animated Image */}
+      <AnimatedHero
+        title="Our Story"
+        subtitle="Bringing authentic Italian pizza to your neighborhood since 2015"
+        imageUrl={HERO_IMAGES.about}
+        imageAlt="Italian pizzeria interior with wood fired oven"
+        animationType="parallax"
+        height="h-[500px]"
+      />
 
       {/* Story Section */}
       <section className="py-24 bg-gradient-to-b from-white to-amber-50 relative">

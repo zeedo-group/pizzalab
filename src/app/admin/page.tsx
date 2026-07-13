@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Download, Copy, Check, Trash2, Edit2, Save, X, MessageSquare, Settings, Image as ImageIcon, Menu as MenuIcon, Link as LinkIcon } from "lucide-react";
+import { AnimatedHero, HERO_IMAGES } from "@/components/AnimatedHero";
 
 type TabType = "images" | "menu" | "settings" | "assistant";
 
@@ -198,21 +199,16 @@ export default function AdminPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50 py-12 px-4">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
-        >
-          <div className="text-6xl mb-4">🛠️</div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
-            Website Admin
-          </h1>
-          <p className="text-gray-600 text-lg">
-            Manage your Pizza Lab website with AI-powered tools
-          </p>
-        </motion.div>
+      <AnimatedHero
+        title="Website Admin"
+        subtitle="Manage your Pizza Lab website with AI-powered tools"
+        imageUrl={HERO_IMAGES.admin}
+        imageAlt="Admin dashboard interface"
+        animationType="parallax"
+        height="h-[350px]"
+      />
 
+      <div className="max-w-6xl mx-auto -mt-8 relative z-10">
         {/* Tabs */}
         <div className="flex flex-wrap justify-center gap-3 mb-8">
           {tabs.map((tab) => (

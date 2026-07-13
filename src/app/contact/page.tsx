@@ -3,41 +3,19 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { AnimatedHero, HERO_IMAGES } from "@/components/AnimatedHero";
 
 export default function ContactPage() {
   return (
     <div className="pt-16">
-      {/* Hero Section */}
-      <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-aurora-hero animate-aurora opacity-90" />
-        <div className="absolute inset-0 bg-pattern opacity-20" />
-        <div className="relative z-10 text-center text-white px-4">
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: "spring", duration: 0.8 }}
-            className="text-6xl mb-4"
-          >
-            📍
-          </motion.div>
-          <motion.h1
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-5xl md:text-6xl font-bold mb-4 drop-shadow-lg"
-          >
-            Visit Us
-          </motion.h1>
-          <motion.p
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="text-xl"
-          >
-            We would love to see you
-          </motion.p>
-        </div>
-      </section>
+      <AnimatedHero
+        title="Visit Us"
+        subtitle="We would love to see you at our pizzeria"
+        imageUrl={HERO_IMAGES.contact}
+        imageAlt="Pizza restaurant interior with cozy seating"
+        animationType="slide-right"
+        height="h-[400px]"
+      />
 
       <section className="py-24 bg-gradient-to-b from-white to-amber-50 relative">
         <div className="absolute inset-0 bg-aurora-subtle opacity-30" />
@@ -56,7 +34,11 @@ export default function ContactPage() {
                     { icon: MapPin, label: "Address", value: "123 Pizza Street, Food City, FC 12345" },
                     { icon: Phone, label: "Phone", value: "(555) 123-4567" },
                     { icon: Mail, label: "Email", value: "hello@pizzalab.com" },
-                    { icon: Clock, label: "Hours", value: "Mon - Thu: 11:00 AM - 10:00 PM\nFri - Sat: 11:00 AM - 12:00 AM\nSunday: 12:00 PM - 9:00 PM" },
+                    { 
+                      icon: Clock, 
+                      label: "Hours", 
+                      value: "Mon - Thu: 11:00 AM - 10:00 PM\nFri - Sat: 11:00 AM - 12:00 AM\nSunday: 12:00 PM - 9:00 PM" 
+                    },
                   ].map((item) => (
                     <motion.div 
                       key={item.label}
@@ -85,7 +67,7 @@ export default function ContactPage() {
                   <div className="text-center">
                     <div className="text-6xl mb-4">🗺️</div>
                     <p className="text-amber-700 font-medium">Google Maps Integration</p>
-                    <p className="text-amber-600 text-sm mt-1">[Add your Google Maps embed here]</p>
+                    <p className="text-amber-600 text-sm mt-1">Add your Google Maps embed iframe here</p>
                   </div>
                 </div>
               </motion.div>

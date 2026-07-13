@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import MenuCard from "@/components/MenuCard";
 import AnimatedSection from "@/components/AnimatedSection";
 import { useCart } from "@/context/CartContext";
+import { AnimatedHero, HERO_IMAGES } from "@/components/AnimatedHero";
 
 interface PizzaData {
   _id: string;
@@ -53,29 +54,16 @@ export default function MenuPage() {
   };
 
   return (
-    <div className="pt-24 pb-12">
-      {/* Hero */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-aurora-hero animate-aurora opacity-90" />
-        <div className="absolute inset-0 bg-pattern opacity-20" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="text-7xl mb-6 animate-float"
-          >
-            🍕
-          </motion.div>
-          <AnimatedSection>
-            <h1 className="text-5xl md:text-6xl font-bold mb-4 text-white drop-shadow-lg">
-              Our Menu
-            </h1>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto">
-              From classic Margherita to our signature creations, every pizza is made fresh to order.
-            </p>
-          </AnimatedSection>
-        </div>
-      </section>
+    <div className="pt-16">
+      {/* Hero Section with Animated Image */}
+      <AnimatedHero
+        title="Our Menu"
+        subtitle="From classic Margherita to our signature creations, every pizza is made fresh to order."
+        imageUrl={HERO_IMAGES.menu}
+        imageAlt="Variety of artisan pizzas on wooden table"
+        animationType="zoom"
+        height="h-[450px]"
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
         {/* Category Filters */}
